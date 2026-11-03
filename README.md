@@ -1,34 +1,33 @@
 # Informe de Auditoría de Red Wi-Fi Insegura
 
 ## Introducción
-Este documento detalla el análisis de tráfico realizado sobre una conexión no segura, exponiendo los riesgos de navegar en redes Wi-Fi públicas sin protección y cómo mitigar estas vulnerabilidades.
+En esta práctica hice un análisis de tráfico de una conexión no segura para ver exactamente qué información queda expuesta cuando navegamos en una red Wi-Fi pública sin protección. La idea es entender los riesgos reales y ver cómo solucionarlos.
 
 ## Sitio analizado
 - **URL:** http://neverssl.com
-- **Propósito:** Es un sitio diseñado específicamente para no usar cifrado, ideal para probar la interceptación de tráfico y portales cautivos.
+- **¿Por qué este sitio?:** Es una página web diseñada a propósito sin cifrado, lo que la hace perfecta para hacer pruebas de red y ver cómo viajan los datos en texto plano.
 
 ## Evidencia observada
-Al analizar la primera solicitud HTTP mediante las herramientas de desarrollador, se obtuvo la siguiente información:
-- **URL solicitada:** http://majesticfreshshiningkiss.neverssl.com/online[cite: 3]
-- **Método HTTP:** GET[cite: 3]
-- **Host:** majesticfreshshiningkiss.neverssl.com[cite: 3]
+Al revisar la primera solicitud desde la pestaña Network de las herramientas de desarrollador, capturé los siguientes datos:
+- **URL solicitada:** http://majesticfreshshiningkiss.neverssl.com/online
+- **Método HTTP:** GET
+- **Host:** majesticfreshshiningkiss.neverssl.com
 - **Protocolo:** HTTP
-- **User-Agent:** Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36[cite: 3]
+- **User-Agent:** Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36
 
 ## Riesgos encontrados
-1. **Protocolo inseguro:** El sitio utiliza HTTP en lugar de HTTPS, lo que significa que la información viaja en texto plano sin cifrar.
-2. **Exposición de datos:** Cualquier persona conectada a la misma red Wi-Fi pública puede interceptar el tráfico de red y leer:
-   - Las URLs exactas de navegación.
-   - El sistema operativo y versión del navegador (User-Agent).
-   - Posibles cookies de sesión, contraseñas o datos de formularios si los hubiera.
+Si alguien estuviera espiando la red (por ejemplo, en un café o aeropuerto), esto es lo que podría pasar:
+1. **Todo viaja en texto plano:** Como el sitio usa HTTP normal, la información no va cifrada.
+2. **Exposición total:** Cualquier persona conectada a la misma red usando un programa para capturar paquetes podría ver exactamente qué páginas estoy visitando.
+3. **Huella del dispositivo:** A través del *User-Agent*, el atacante ya sabe qué sistema operativo uso y qué navegador tengo. Esto le sirve para buscar vulnerabilidades específicas de mi equipo. Si hubiera enviado una contraseña o una cookie, también la habría visto sin esfuerzo.
 
-## Cómo ayuda una VPN
-El uso de una Red Privada Virtual (VPN) mitiga estos riesgos mediante:
-- **Cifrado:** Aplica criptografía sólida a todos los paquetes de datos que entran y salen del dispositivo.
-- **Túnel seguro:** Crea una conexión cifrada entre el dispositivo y el servidor VPN, ocultando el destino final del tráfico a los administradores de la red local.
-- **Protección del tráfico:** Un atacante en la red Wi-Fi pública solo interceptará un flujo de datos incomprensible, protegiendo la privacidad y las credenciales del usuario.
+## ¿Cómo nos ayuda una VPN?
+Si hubiera puesto una VPN antes de hacer esto, la historia sería muy distinta:
+- **Cifrado real:** Todo el tráfico saldría de mi computadora ya encriptado.
+- **Túnel invisible:** El atacante en la red pública solo vería que estoy conectado a un servidor VPN, pero no tendría idea de que estoy visitando "neverssl.com" ni qué estoy haciendo ahí.
+- **Privacidad garantizada:** Toda esa evidencia sería solo una sopa de letras indescifrable para quien intente espiar.
 
-## 3 Reglas de Oro para navegar en redes Wi-Fi públicas
-1. Nunca ingresar credenciales bancarias ni realizar transacciones financieras sin estar conectado a una VPN de confianza.
-2. Verificar siempre que la conexión utilice HTTPS antes de ingresar cualquier dato personal o contraseña.
-3. Desactivar la función de conexión automática a redes Wi-Fi abiertas en todos los dispositivos móviles y computadoras portátiles.
+## Mis 3 Reglas para redes Wi-Fi públicas
+1. Si estoy en el Wi-Fi de un aeropuerto, plaza o café, nunca entro al banco ni pago nada a menos que tenga mi VPN encendida.
+2. Siempre reviso que aparezca (HTTPS) en la barra de direcciones antes de escribir un usuario o contraseña en cualquier lado.
+3. Tengo desactivada la opción del celular y la computadora que se conecta automáticamente a cualquier red abierta que encuentre por la calle.

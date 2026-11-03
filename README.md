@@ -1,5 +1,9 @@
 # Informe de Auditoría de Red Wi-Fi Insegura
 
+**Asignatura:** Ciberseguridad
+**Alumno:** Juan Manuel Diaz
+**Comisión:** 105720
+
 ## Introducción
 En esta práctica hice un análisis de tráfico de una conexión no segura para ver exactamente qué información queda expuesta cuando navegamos en una red Wi-Fi pública sin protección. La idea es entender los riesgos reales y ver cómo solucionarlos.
 
